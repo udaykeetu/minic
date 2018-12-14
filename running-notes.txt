@@ -1,0 +1,90 @@
+minic compiler notes
+
+
+
+Dec 13, 2018
+write a program includes some information your AST does not need, like the return type and list of function parameters.
+1. read the file
+2. lex it
+3. parse it
+4. generate assembly
+5. write the assembly to a file
+6. invoke GCC command to convert the assembly to an executable.
+   gcc -m32 assembly.s -o out
+
+   architecture
+
+   minic.c    
+              |_______________ infile.h
+              |
+              |---------------lex.h
+              |
+              |
+              |------------- parse.h
+              |
+              |
+              |-------------asm.h
+              |
+              |
+              |------------- outfile.h
+              |
+              |------------- asmtobin.h
+              |
+
+
+
+
+Dec13,2018
+Just started to embark on a journey to write a C compiler. 
+I dont have any idea how to do it. Resources I am depending on are:
+- ANSI C Grammar
+http://www.quut.com/c/ANSI-C-grammar-y-2011.html
+- Baby steps to write a C compiler
+http://www.wilfred.me.uk/blog/2014/08/27/baby-steps-to-a-c-compiler/
+
+this is based on approach discussed in An increment Approach to Compiler Construction.
+http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf
+
+Development Time frame:
+The development of the compiler must proceed in small steps where every step can be implemented and tested in one sitting. Features that require many sittings to complete are broken down into smaller steps. The result of completing every step is a fully working compiler. The compiler writer, therefore, achieves progress in every step in the development.  With our approach of incremental development, wehre every step results in a fully working environment for some subset of C, the risk of not "completing" the compiler is minimized.
+
+Development Methodology
+
+1. Choose a small subset of the source language that we can compile directly to assembly
+2. write as many test cases as necessary to cover the chosen subset of the language
+3. write a compiler that accepts an expression (in the chosen subset of the source language) and outputs the equivalent sequence in assembly instructions
+4. Ensure that the compiler is functional, i.e. it passes all the tests that are written beforehand.
+5. Refactor the compiler, if necessary, making sure that none of the tests are broken due to incorrect refactoring
+6. Enlarge subset of the language in a very small step and repeat the cycle by writing more tests and extending the compiler to meet the newly-added requirements. 
+
+A fully working compiler for the given subset of the language is available at every step in the development cycle starting from the first day of development. The test cases are written to help ensure that the implementation meets the specifications and to guard against bugs that may be introduced during the refactoring steps. Knowledge of compilation techniques as well as the target machine is built incrementally. The initial overhead of learning the assembly instructions only when they are needed. The compiler starts small and is well focused on translating the source language to assembly, and every incremental step reinforces that focus. 
+
+Testing infrastructure
+
+Writing compiler in 24 small steps
+3.1 Integers
+3.2 Immediate constants
+3.3 Unary Primitives
+3.4 Binary Primitives
+3.5 Local variables
+3.6 Conditional expressions
+3.7 Heap allocation
+3.8 Procedure calls
+3.9 Closures
+3.10 Proper Tail calls
+3.11 Complex Constants
+3.12 Assignment
+3.13 Extending the syntax
+3.14 symbols, libaries, and separate compilation
+3.15 Foreign functions
+3.16 Error checking and safe primitives
+3.17 Variable-arity Procedures
+3.18 Apply
+3.19 Output Ports
+3.20 Write and Display
+3.21 Input Ports
+3.22 Tokenizer
+3.23 Reader
+3.24 Interpreter
+
+
